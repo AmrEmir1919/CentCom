@@ -1,0 +1,904 @@
+{
+  "log": {
+    "level": "warn",
+    "output": "box.log",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "dns-remote",
+        "address": "tcp://8.8.8.8",
+        "address_resolver": "dns-direct"
+      },
+      {
+        "tag": "dns-trick-direct",
+        "address": "https://sky.rethinkdns.com/",
+        "detour": "direct-fragment"
+      },
+      {
+        "tag": "dns-direct",
+        "address": "local",
+        "address_resolver": "dns-local",
+        "detour": "direct"
+      },
+      {
+        "tag": "dns-local",
+        "address": "local",
+        "detour": "direct"
+      },
+      {
+        "tag": "dns-block",
+        "address": "rcode://success"
+      }
+    ],
+    "rules": [
+      {
+        "domain": "cp.cloudflare.com",
+        "server": "dns-remote",
+        "rewrite_ttl": 3000
+      },
+      {
+        "rule_set": [
+          "geosite-ads",
+          "geosite-malware",
+          "geosite-phishing",
+          "geosite-cryptominers",
+          "geoip-malware",
+          "geoip-phishing"
+        ],
+        "server": "dns-block"
+      },
+      {
+        "domain_suffix": ".ir",
+        "server": "dns-direct"
+      },
+      {
+        "rule_set": [
+          "geoip-ir",
+          "geosite-ir"
+        ],
+        "server": "dns-direct"
+      }
+    ],
+    "final": "dns-remote",
+    "static_ips": {
+      "sky.rethinkdns.com": [
+        "104.17.148.22",
+        "104.17.147.22",
+        "188.114.97.3",
+        "188.114.96.3"
+      ]
+    },
+    "independent_cache": true
+  },
+  "inbounds": [
+    {
+      "type": "mixed",
+      "tag": "mixed-in",
+      "listen": "127.0.0.1",
+      "listen_port": 12334,
+      "sniff": true,
+      "sniff_override_destination": true,
+      "set_system_proxy": true
+    },
+    {
+      "type": "direct",
+      "tag": "dns-in",
+      "listen": "127.0.0.1",
+      "listen_port": 16450
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "selector",
+      "tag": "select",
+      "outbounds": [
+        "auto",
+        "CentCom § 0",
+        "CentCom § 1",
+        "CentCom § 2",
+        "CentCom § 3",
+        "CentCom § 4",
+        "CentCom § 5",
+        "CentCom § 6",
+        "CentCom § 7",
+        "CentCom § 8",
+        "CentCom § 9",
+        "CentCom § 10",
+        "CentCom § 11"
+      ],
+      "default": "auto",
+      "interrupt_exist_connections": true
+    },
+    {
+      "type": "urltest",
+      "tag": "auto",
+      "outbounds": [
+        "CentCom § 0",
+        "CentCom § 1",
+        "CentCom § 2",
+        "CentCom § 3",
+        "CentCom § 4",
+        "CentCom § 5",
+        "CentCom § 6",
+        "CentCom § 7",
+        "CentCom § 8",
+        "CentCom § 9",
+        "CentCom § 10",
+        "CentCom § 11"
+      ],
+      "url": "http://cp.cloudflare.com",
+      "interval": "30m0s",
+      "tolerance": 1,
+      "idle_timeout": "1h30m0s",
+      "interrupt_exist_connections": true
+    },
+    {
+      "type": "xray",
+      "tag": "CentCom § 0",
+      "xray_outbound_raw": {
+        "protocol": "vless",
+        "settings": {
+          "vnext": [
+            {
+              "address": "199.232.0.156",
+              "port": 443,
+              "users": [
+                {
+                  "encryption": "none",
+                  "flow": "",
+                  "id": "16f832da-8620-4049-9eac-5d1ef9fedce5"
+                }
+              ]
+            }
+          ]
+        },
+        "streamSettings": {
+          "network": "ws",
+          "security": "tls",
+          "tlsSettings": {
+            "allowInsecure": true,
+            "alpn": [
+              "http/1.1"
+            ],
+            "fingerprint": "randomized",
+            "rejectUnknownSni": false,
+            "serverName": "mY.lOnDoN-mFa.ir"
+          },
+          "wsSettings": {
+            "headers": {
+              "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
+            },
+            "host": "my.london-mfa.ir",
+            "path": "/ZJaEnCreS4pmuDsa?ed=2560"
+          }
+        },
+        "tag": "CentCom"
+      },
+      "xray_fragment": {
+        "packets": "",
+        "length": "",
+        "interval": "",
+        "host1_header": "",
+        "host1_domain": "",
+        "host2_header": "",
+        "host2_domain": ""
+      },
+      "xray_loglevel": ""
+    },
+    {
+      "type": "xray",
+      "tag": "CentCom § 1",
+      "xray_outbound_raw": {
+        "protocol": "vless",
+        "settings": {
+          "vnext": [
+            {
+              "address": "199.232.86.230",
+              "port": 443,
+              "users": [
+                {
+                  "encryption": "none",
+                  "flow": "",
+                  "id": "16f832da-8620-4049-9eac-5d1ef9fedce5"
+                }
+              ]
+            }
+          ]
+        },
+        "streamSettings": {
+          "network": "ws",
+          "security": "tls",
+          "tlsSettings": {
+            "allowInsecure": true,
+            "alpn": [
+              "http/1.1"
+            ],
+            "fingerprint": "randomized",
+            "rejectUnknownSni": false,
+            "serverName": "mY.lOnDoN-mFa.ir"
+          },
+          "wsSettings": {
+            "headers": {
+              "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
+            },
+            "host": "my.london-mfa.ir",
+            "path": "/ZJaEnCreS4pmuDsa?ed=2560"
+          }
+        },
+        "tag": "CentCom"
+      },
+      "xray_fragment": {
+        "packets": "",
+        "length": "",
+        "interval": "",
+        "host1_header": "",
+        "host1_domain": "",
+        "host2_header": "",
+        "host2_domain": ""
+      },
+      "xray_loglevel": ""
+    },
+    {
+      "type": "xray",
+      "tag": "CentCom § 2",
+      "xray_outbound_raw": {
+        "protocol": "vless",
+        "settings": {
+          "vnext": [
+            {
+              "address": "199.232.4.147",
+              "port": 443,
+              "users": [
+                {
+                  "encryption": "none",
+                  "flow": "",
+                  "id": "16f832da-8620-4049-9eac-5d1ef9fedce5"
+                }
+              ]
+            }
+          ]
+        },
+        "streamSettings": {
+          "network": "ws",
+          "security": "tls",
+          "tlsSettings": {
+            "allowInsecure": true,
+            "alpn": [
+              "http/1.1"
+            ],
+            "fingerprint": "randomized",
+            "rejectUnknownSni": false,
+            "serverName": "mY.lOnDoN-mFa.ir"
+          },
+          "wsSettings": {
+            "headers": {
+              "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
+            },
+            "host": "my.london-mfa.ir",
+            "path": "/ZJaEnCreS4pmuDsa?ed=2560"
+          }
+        },
+        "tag": "CentCom"
+      },
+      "xray_fragment": {
+        "packets": "",
+        "length": "",
+        "interval": "",
+        "host1_header": "",
+        "host1_domain": "",
+        "host2_header": "",
+        "host2_domain": ""
+      },
+      "xray_loglevel": ""
+    },
+    {
+      "type": "xray",
+      "tag": "CentCom § 3",
+      "xray_outbound_raw": {
+        "protocol": "vless",
+        "settings": {
+          "vnext": [
+            {
+              "address": "199.232.84.107",
+              "port": 443,
+              "users": [
+                {
+                  "encryption": "none",
+                  "flow": "",
+                  "id": "16f832da-8620-4049-9eac-5d1ef9fedce5"
+                }
+              ]
+            }
+          ]
+        },
+        "streamSettings": {
+          "network": "ws",
+          "security": "tls",
+          "tlsSettings": {
+            "allowInsecure": true,
+            "alpn": [
+              "http/1.1"
+            ],
+            "fingerprint": "randomized",
+            "rejectUnknownSni": false,
+            "serverName": "mY.lOnDoN-mFa.ir"
+          },
+          "wsSettings": {
+            "headers": {
+              "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
+            },
+            "host": "my.london-mfa.ir",
+            "path": "/ZJaEnCreS4pmuDsa?ed=2560"
+          }
+        },
+        "tag": "CentCom"
+      },
+      "xray_fragment": {
+        "packets": "",
+        "length": "",
+        "interval": "",
+        "host1_header": "",
+        "host1_domain": "",
+        "host2_header": "",
+        "host2_domain": ""
+      },
+      "xray_loglevel": ""
+    },
+    {
+      "type": "xray",
+      "tag": "CentCom § 4",
+      "xray_outbound_raw": {
+        "protocol": "vless",
+        "settings": {
+          "vnext": [
+            {
+              "address": "199.232.85.236",
+              "port": 443,
+              "users": [
+                {
+                  "encryption": "none",
+                  "flow": "",
+                  "id": "16f832da-8620-4049-9eac-5d1ef9fedce5"
+                }
+              ]
+            }
+          ]
+        },
+        "streamSettings": {
+          "network": "ws",
+          "security": "tls",
+          "tlsSettings": {
+            "allowInsecure": true,
+            "alpn": [
+              "http/1.1"
+            ],
+            "fingerprint": "randomized",
+            "rejectUnknownSni": false,
+            "serverName": "mY.lOnDoN-mFa.ir"
+          },
+          "wsSettings": {
+            "headers": {
+              "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
+            },
+            "host": "my.london-mfa.ir",
+            "path": "/ZJaEnCreS4pmuDsa?ed=2560"
+          }
+        },
+        "tag": "CentCom"
+      },
+      "xray_fragment": {
+        "packets": "",
+        "length": "",
+        "interval": "",
+        "host1_header": "",
+        "host1_domain": "",
+        "host2_header": "",
+        "host2_domain": ""
+      },
+      "xray_loglevel": ""
+    },
+    {
+      "type": "xray",
+      "tag": "CentCom § 5",
+      "xray_outbound_raw": {
+        "protocol": "vless",
+        "settings": {
+          "vnext": [
+            {
+              "address": "199.232.4.186",
+              "port": 443,
+              "users": [
+                {
+                  "encryption": "none",
+                  "flow": "",
+                  "id": "16f832da-8620-4049-9eac-5d1ef9fedce5"
+                }
+              ]
+            }
+          ]
+        },
+        "streamSettings": {
+          "network": "ws",
+          "security": "tls",
+          "tlsSettings": {
+            "allowInsecure": true,
+            "alpn": [
+              "http/1.1"
+            ],
+            "fingerprint": "randomized",
+            "rejectUnknownSni": false,
+            "serverName": "mY.lOnDoN-mFa.ir"
+          },
+          "wsSettings": {
+            "headers": {
+              "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
+            },
+            "host": "my.london-mfa.ir",
+            "path": "/ZJaEnCreS4pmuDsa?ed=2560"
+          }
+        },
+        "tag": "CentCom"
+      },
+      "xray_fragment": {
+        "packets": "",
+        "length": "",
+        "interval": "",
+        "host1_header": "",
+        "host1_domain": "",
+        "host2_header": "",
+        "host2_domain": ""
+      },
+      "xray_loglevel": ""
+    },
+    {
+      "type": "xray",
+      "tag": "CentCom § 6",
+      "xray_outbound_raw": {
+        "protocol": "vless",
+        "settings": {
+          "vnext": [
+            {
+              "address": "199.232.6.37",
+              "port": 443,
+              "users": [
+                {
+                  "encryption": "none",
+                  "flow": "",
+                  "id": "16f832da-8620-4049-9eac-5d1ef9fedce5"
+                }
+              ]
+            }
+          ]
+        },
+        "streamSettings": {
+          "network": "ws",
+          "security": "tls",
+          "tlsSettings": {
+            "allowInsecure": true,
+            "alpn": [
+              "http/1.1"
+            ],
+            "fingerprint": "randomized",
+            "rejectUnknownSni": false,
+            "serverName": "mY.lOnDoN-mFa.ir"
+          },
+          "wsSettings": {
+            "headers": {
+              "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
+            },
+            "host": "my.london-mfa.ir",
+            "path": "/ZJaEnCreS4pmuDsa?ed=2560"
+          }
+        },
+        "tag": "CentCom"
+      },
+      "xray_fragment": {
+        "packets": "",
+        "length": "",
+        "interval": "",
+        "host1_header": "",
+        "host1_domain": "",
+        "host2_header": "",
+        "host2_domain": ""
+      },
+      "xray_loglevel": ""
+    },
+    {
+      "type": "xray",
+      "tag": "CentCom § 7",
+      "xray_outbound_raw": {
+        "protocol": "vless",
+        "settings": {
+          "vnext": [
+            {
+              "address": "199.232.85.131",
+              "port": 443,
+              "users": [
+                {
+                  "encryption": "none",
+                  "flow": "",
+                  "id": "16f832da-8620-4049-9eac-5d1ef9fedce5"
+                }
+              ]
+            }
+          ]
+        },
+        "streamSettings": {
+          "network": "ws",
+          "security": "tls",
+          "tlsSettings": {
+            "allowInsecure": true,
+            "alpn": [
+              "http/1.1"
+            ],
+            "fingerprint": "randomized",
+            "rejectUnknownSni": false,
+            "serverName": "mY.lOnDoN-mFa.ir"
+          },
+          "wsSettings": {
+            "headers": {
+              "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
+            },
+            "host": "my.london-mfa.ir",
+            "path": "/ZJaEnCreS4pmuDsa?ed=2560"
+          }
+        },
+        "tag": "CentCom"
+      },
+      "xray_fragment": {
+        "packets": "",
+        "length": "",
+        "interval": "",
+        "host1_header": "",
+        "host1_domain": "",
+        "host2_header": "",
+        "host2_domain": ""
+      },
+      "xray_loglevel": ""
+    },
+    {
+      "type": "xray",
+      "tag": "CentCom § 8",
+      "xray_outbound_raw": {
+        "protocol": "vless",
+        "settings": {
+          "vnext": [
+            {
+              "address": "199.232.4.210",
+              "port": 443,
+              "users": [
+                {
+                  "encryption": "none",
+                  "flow": "",
+                  "id": "16f832da-8620-4049-9eac-5d1ef9fedce5"
+                }
+              ]
+            }
+          ]
+        },
+        "streamSettings": {
+          "network": "ws",
+          "security": "tls",
+          "tlsSettings": {
+            "allowInsecure": true,
+            "alpn": [
+              "http/1.1"
+            ],
+            "fingerprint": "randomized",
+            "rejectUnknownSni": false,
+            "serverName": "mY.lOnDoN-mFa.ir"
+          },
+          "wsSettings": {
+            "headers": {
+              "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
+            },
+            "host": "my.london-mfa.ir",
+            "path": "/ZJaEnCreS4pmuDsa?ed=2560"
+          }
+        },
+        "tag": "CentCom"
+      },
+      "xray_fragment": {
+        "packets": "",
+        "length": "",
+        "interval": "",
+        "host1_header": "",
+        "host1_domain": "",
+        "host2_header": "",
+        "host2_domain": ""
+      },
+      "xray_loglevel": ""
+    },
+    {
+      "type": "xray",
+      "tag": "CentCom § 9",
+      "xray_outbound_raw": {
+        "protocol": "vless",
+        "settings": {
+          "vnext": [
+            {
+              "address": "199.232.6.184",
+              "port": 443,
+              "users": [
+                {
+                  "encryption": "none",
+                  "flow": "",
+                  "id": "16f832da-8620-4049-9eac-5d1ef9fedce5"
+                }
+              ]
+            }
+          ]
+        },
+        "streamSettings": {
+          "network": "ws",
+          "security": "tls",
+          "tlsSettings": {
+            "allowInsecure": true,
+            "alpn": [
+              "http/1.1"
+            ],
+            "fingerprint": "randomized",
+            "rejectUnknownSni": false,
+            "serverName": "mY.lOnDoN-mFa.ir"
+          },
+          "wsSettings": {
+            "headers": {
+              "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
+            },
+            "host": "my.london-mfa.ir",
+            "path": "/ZJaEnCreS4pmuDsa?ed=2560"
+          }
+        },
+        "tag": "CentCom"
+      },
+      "xray_fragment": {
+        "packets": "",
+        "length": "",
+        "interval": "",
+        "host1_header": "",
+        "host1_domain": "",
+        "host2_header": "",
+        "host2_domain": ""
+      },
+      "xray_loglevel": ""
+    },
+    {
+      "type": "xray",
+      "tag": "CentCom § 10",
+      "xray_outbound_raw": {
+        "protocol": "vless",
+        "settings": {
+          "vnext": [
+            {
+              "address": "199.232.2.47",
+              "port": 443,
+              "users": [
+                {
+                  "encryption": "none",
+                  "flow": "",
+                  "id": "16f832da-8620-4049-9eac-5d1ef9fedce5"
+                }
+              ]
+            }
+          ]
+        },
+        "streamSettings": {
+          "network": "ws",
+          "security": "tls",
+          "tlsSettings": {
+            "allowInsecure": true,
+            "alpn": [
+              "http/1.1"
+            ],
+            "fingerprint": "randomized",
+            "rejectUnknownSni": false,
+            "serverName": "mY.lOnDoN-mFa.ir"
+          },
+          "wsSettings": {
+            "headers": {
+              "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
+            },
+            "host": "my.london-mfa.ir",
+            "path": "/ZJaEnCreS4pmuDsa?ed=2560"
+          }
+        },
+        "tag": "CentCom"
+      },
+      "xray_fragment": {
+        "packets": "",
+        "length": "",
+        "interval": "",
+        "host1_header": "",
+        "host1_domain": "",
+        "host2_header": "",
+        "host2_domain": ""
+      },
+      "xray_loglevel": ""
+    },
+    {
+      "type": "xray",
+      "tag": "CentCom § 11",
+      "xray_outbound_raw": {
+        "protocol": "vless",
+        "settings": {
+          "vnext": [
+            {
+              "address": "199.232.3.149",
+              "port": 443,
+              "users": [
+                {
+                  "encryption": "none",
+                  "flow": "",
+                  "id": "16f832da-8620-4049-9eac-5d1ef9fedce5"
+                }
+              ]
+            }
+          ]
+        },
+        "streamSettings": {
+          "network": "ws",
+          "security": "tls",
+          "tlsSettings": {
+            "allowInsecure": true,
+            "alpn": [
+              "http/1.1"
+            ],
+            "fingerprint": "randomized",
+            "rejectUnknownSni": false,
+            "serverName": "mY.lOnDoN-mFa.ir"
+          },
+          "wsSettings": {
+            "headers": {
+              "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
+            },
+            "host": "my.london-mfa.ir",
+            "path": "/ZJaEnCreS4pmuDsa?ed=2560"
+          }
+        },
+        "tag": "CentCom"
+      },
+      "xray_fragment": {
+        "packets": "",
+        "length": "",
+        "interval": "",
+        "host1_header": "",
+        "host1_domain": "",
+        "host2_header": "",
+        "host2_domain": ""
+      },
+      "xray_loglevel": ""
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "direct",
+      "tag": "direct-fragment",
+      "tls_fragment": {
+        "enabled": true,
+        "size": "10-30",
+        "sleep": "2-8"
+      }
+    },
+    {
+      "type": "direct",
+      "tag": "bypass"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "inbound": "dns-in",
+        "outbound": "dns-out"
+      },
+      {
+        "port": 53,
+        "outbound": "dns-out"
+      },
+      {
+        "rule_set": [
+          "geosite-ads",
+          "geosite-malware",
+          "geosite-phishing",
+          "geosite-cryptominers",
+          "geoip-malware",
+          "geoip-phishing"
+        ],
+        "outbound": "block"
+      },
+      {
+        "domain_suffix": ".ir",
+        "outbound": "direct"
+      },
+      {
+        "rule_set": [
+          "geoip-ir",
+          "geosite-ir"
+        ],
+        "outbound": "direct"
+      }
+    ],
+    "rule_set": [
+      {
+        "type": "remote",
+        "tag": "geosite-ads",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/block/geosite-category-ads-all.srs",
+        "update_interval": "120h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-malware",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/block/geosite-malware.srs",
+        "update_interval": "120h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-phishing",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/block/geosite-phishing.srs",
+        "update_interval": "120h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-cryptominers",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/block/geosite-cryptominers.srs",
+        "update_interval": "120h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "geoip-phishing",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/block/geoip-phishing.srs",
+        "update_interval": "120h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "geoip-malware",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/block/geoip-malware.srs",
+        "update_interval": "120h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "geoip-ir",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/country/geoip-ir.srs",
+        "update_interval": "120h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-ir",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/country/geosite-ir.srs",
+        "update_interval": "120h0m0s"
+      }
+    ],
+    "final": "select",
+    "auto_detect_interface": true,
+    "override_android_vpn": true
+  },
+  "experimental": {
+    "cache_file": {
+      "enabled": true,
+      "path": "clash.db"
+    },
+    "clash_api": {
+      "external_controller": "127.0.0.1:16756",
+      "secret": "zvj6_m35MQ-5g_pz"
+    }
+  }
+}
