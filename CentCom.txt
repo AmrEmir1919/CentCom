@@ -20,11 +20,3 @@ vless://86ec3259-393b-4eb5-971d-c907603c4f82@199.232.8.144:443?encryption=none&s
 vless://86ec3259-393b-4eb5-971d-c907603c4f82@199.232.6.184:443?encryption=none&security=tls&sni=hsP-sAnjeSh.net&fp=randomized&allowInsecure=1&type=ws&host=hSp-sanjEsh.net&path=%2F%3Fed%3D2560#CentCom
 vless://86ec3259-393b-4eb5-971d-c907603c4f82@199.232.5.180:443?encryption=none&security=tls&sni=hsP-sAnjeSh.net&fp=randomized&allowInsecure=1&type=ws&host=hSp-sanjEsh.net&path=%2F%3Fed%3D2560#CentCom
 vless://86ec3259-393b-4eb5-971d-c907603c4f82@199.232.5.178:443?encryption=none&security=tls&sni=hsP-sAnjeSh.net&fp=randomized&allowInsecure=1&type=ws&host=hSp-sanjEsh.net&path=%2F%3Fed%3D2560#CentCom
-trojan://autoo@199.232.4.210:443?security=tls&sni=meDiA.vaRzH.ir&fp=randomized&allowInsecure=1&type=ws&host=mEdia.vArzH.ir&path=%2F%3Fed%3D2560#CentCom
-trojan://autoo@199.232.4.186:443?security=tls&sni=meDiA.vaRzH.ir&fp=randomized&allowInsecure=1&type=ws&host=mEdia.vArzH.ir&path=%2F%3Fed%3D2560#CentCom
-trojan://autoo@199.232.4.147:443?security=tls&sni=meDiA.vaRzH.ir&fp=randomized&allowInsecure=1&type=ws&host=mEdia.vArzH.ir&path=%2F%3Fed%3D2560#CentCom
-trojan://autoo@199.232.3.149:443?security=tls&sni=meDiA.vaRzH.ir&fp=randomized&allowInsecure=1&type=ws&host=mEdia.vArzH.ir&path=%2F%3Fed%3D2560#CentCom
-trojan://autoo@199.232.2.47:443?security=tls&sni=meDiA.vaRzH.ir&fp=randomized&allowInsecure=1&type=ws&host=mEdia.vArzH.ir&path=%2F%3Fed%3D2560#CentCom
-trojan://autoo@199.232.12.41:443?security=tls&sni=meDiA.vaRzH.ir&fp=randomized&allowInsecure=1&type=ws&host=mEdia.vArzH.ir&path=%2F%3Fed%3D2560#CentCom
-trojan://autoo@199.232.11.247:443?security=tls&sni=meDiA.vaRzH.ir&fp=randomized&allowInsecure=1&type=ws&host=mEdia.vArzH.ir&path=%2F%3Fed%3D2560#CentCom
-trojan://autoo@199.232.0.156:443?security=tls&sni=meDiA.vaRzH.ir&fp=randomized&allowInsecure=1&type=ws&host=mEdia.vArzH.ir&path=%2F%3Fed%3D2560#CentCom
