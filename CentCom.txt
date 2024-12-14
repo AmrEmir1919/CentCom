@@ -18,8 +18,6 @@ vless://86ec3259-393b-4eb5-971d-c907603c4f82@199.232.85.131:443?encryption=none&
 vless://86ec3259-393b-4eb5-971d-c907603c4f82@199.232.84.107:443?encryption=none&security=tls&sni=hsP-sAnjeSh.net&fp=randomized&allowInsecure=1&type=ws&host=hSp-sanjEsh.net&path=%2F%3Fed%3D2560#CentCom
 vless://86ec3259-393b-4eb5-971d-c907603c4f82@199.232.8.144:443?encryption=none&security=tls&sni=hsP-sAnjeSh.net&fp=randomized&allowInsecure=1&type=ws&host=hSp-sanjEsh.net&path=%2F%3Fed%3D2560#CentCom
 vless://86ec3259-393b-4eb5-971d-c907603c4f82@199.232.6.184:443?encryption=none&security=tls&sni=hsP-sAnjeSh.net&fp=randomized&allowInsecure=1&type=ws&host=hSp-sanjEsh.net&path=%2F%3Fed%3D2560#CentCom
-vless://86ec3259-393b-4eb5-971d-c907603c4f82@199.232.5.180:443?encryption=none&security=tls&sni=hsP-sAnjeSh.net&fp=randomized&allowInsecure=1&type=ws&host=hSp-sanjEsh.net&path=%2F%3Fed%3D2560#CentCom
-vless://86ec3259-393b-4eb5-971d-c907603c4f82@199.232.5.178:443?encryption=none&security=tls&sni=hsP-sAnjeSh.net&fp=randomized&allowInsecure=1&type=ws&host=hSp-sanjEsh.net&path=%2F%3Fed%3D2560#CentCom
 trojan://auto@199.232.87.203:443?security=tls&sni=iR-vArZeShi.nEt&fp=randomized&allowInsecure=1&type=ws&host=iR-vaRzesHi.net&path=%2F294f4382.centmn-bin459.pages.dev%2F%3Fed%3D2560#CentCom
 trojan://auto@199.232.4.210:443?security=tls&sni=iR-vArZeShi.nEt&fp=randomized&allowInsecure=1&type=ws&host=iR-vaRzesHi.net&path=%2F294f4382.centmn-bin459.pages.dev%2F%3Fed%3D2560#CentCom
 trojan://auto@199.232.11.200:443?security=tls&sni=iR-vArZeShi.nEt&fp=randomized&allowInsecure=1&type=ws&host=iR-vaRzesHi.net&path=%2F294f4382.centmn-bin459.pages.dev%2F%3Fed%3D2560#CentCom
